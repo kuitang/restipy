@@ -25,7 +25,7 @@ Examples:
 
     # Make an authenticated bit.ly wrapper using hardcoded keys
     def bt_get_requestor():
-        bt_format_str = 'http://api.bitly.com/v3/%s?login='+LOGIN+'&apiKey='+KEY+'&%s"
+        bt_format_str = 'http://api.bitly.com/v3/%s?login='+LOGIN+'&apiKey='+KEY+'&%s'
         return make_requestor(lambda *args: bt_format_str%args)
     bitly_request = bt_get_requestor()
     print bitly_request('shorten', longUrl='http://kui-tang.com')
