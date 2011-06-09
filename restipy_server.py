@@ -46,7 +46,7 @@ def make_restipy(pre_request=lambda env,sr: None,
         ret = post_call(environ, start_response, f_ret)
         if ret: return ret
         start_response('200 OK', [('Content-type', 'application/json')])
-        return json.dumps(f_ret, separators=(',',':'))
+        return (json.dumps(f_ret, separators=(',',':')),)
     return app
     
 def restipy(callback,
