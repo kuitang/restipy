@@ -32,7 +32,7 @@ def make_restipy(pre_request=lambda env,sr: None,
              
         except KeyError:
             start_response('404 NOT FOUND', [('Content-type', 'text/plain')])
-            return ('Not Found')
+            return ('Not Found',)
 
         kwargs = urlparse.parse_qs(environ['QUERY_STRING'])
         args = []
@@ -46,10 +46,10 @@ def make_restipy(pre_request=lambda env,sr: None,
         ret = post_call(environ, start_response, f_ret)
         if ret: return ret
         start_response('200 OK', [('Content-type', 'application/json')])
-        return (json.dumps(f_ret, separators=(',',':')))
+        return json.dumps(f_ret, separators=(',',':'))
     return app
     
-def restipy(callable,
+def restipy(callback,
             pre_call=lambda env,sr,args,kwargs: None,
             post_call=lambda env,sr,call_ret: None):
     """Create a handler for callable.
@@ -63,5 +63,5 @@ def restipy(callable,
 
     If any callback returns, the wsgi app returns that value.
     """
-    _func_table[callable.__name__] = (callable, pre_call, post_call)
+    _func_table[callback.__name__] = (callback, pre_call, post_call)
 
