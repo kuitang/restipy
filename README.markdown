@@ -73,12 +73,14 @@ Examples:
 See the examples for authenticated constructors, servers, or more advanced stuff.
 
 Client notes
+
 - Most APIs require you to send API keys with each request or do
   complicated authentication and then a key with each request.
   You do that on your own: build a template URL including your keys, and
   we'll take care of the boilerplate of each method call.
 
 Server notes
+
 - By default we extract /method?k1=v1&k2=v2 from PATH_INFO and QUERY_STRING
   and we call method(k1='v1', k2='v2') and return the JSON of whatever
   method returns. The pre_request and method_extractor callbacks allow
