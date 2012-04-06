@@ -1,7 +1,7 @@
 import urllib, urllib2, json
 
 # Universal minimalist JSON REST wrapper
-def make_requestor(url_maker):
+def make_requestor(url_maker, debug=False):
     """Returns an f(method,**kwargs) to request against an API.
 
     url_maker -- a lambda method, args_str: ... returning a url string
@@ -12,7 +12,7 @@ def make_requestor(url_maker):
     def request(method='', **kwargs):
         args_str = urllib.urlencode(kwargs)
         url = url_maker(method, args_str)
-        #print url
+        if debug: print "restipy: requesting %s"%url
         return json.load(urllib2.urlopen(url))
     return request
 # TODO: Suppose POST.
